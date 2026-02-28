@@ -56,7 +56,11 @@ public class SecurityConfig {
                 // 3. Authorization rules
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/api/encode-password").permitAll()
+                        .requestMatchers("/api/test/**").permitAll()  // for debugging
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")   // protect admin endpoints
+                        .requestMatchers("/api/faculty/**").hasRole("FACULTY")   // protect faculty endpoints
+                        .requestMatchers("/api/student/**").hasRole("STUDENT")   // protect student endpoints
                         .anyRequest().authenticated()
                 )
 
